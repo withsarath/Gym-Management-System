@@ -8,11 +8,11 @@ router.get("/admin", verifyToken, authorizeRole("admin"),  (req, res) => {
     res.json({ message: "Welcome Admin" })
 })
 // * Both admin and trainer can access this route
-router.get("/trainer", authorizeRole("admin", "manager"), (req, res) => {
+router.get("/trainer",verifyToken, authorizeRole("admin", "trainer"), (req, res) => {
     res.json({ message: "Welcome trainer" })
 })
 // * All can access this route
-router.get("/member",authorizeRole("admin", "manager", "user"), (req, res) => {
+router.get("/member", verifyToken, authorizeRole("admin", "trainer", "user"), (req, res) => {
     res.json({ message: "Welcome member" })
 })
 
