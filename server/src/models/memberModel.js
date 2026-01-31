@@ -27,7 +27,7 @@ const memberSchema = new mongoose.Schema({
         required: true
     }
 
-})
+},{timestamps: true})
 
 const Member = mongoose.model("Member", memberSchema);
 export default Member;
