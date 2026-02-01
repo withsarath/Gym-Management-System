@@ -9,14 +9,11 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+//middlewares
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/members", memberRoutes);
-
-app.get("/", (req, res) => {
-    res.send("Working!!")
-})
 
 connectDb().then(() => {
     app.listen(PORT, () => {

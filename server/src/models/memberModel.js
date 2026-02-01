@@ -18,6 +18,7 @@ const memberSchema = new mongoose.Schema({
         default: Date.now()
     },
     status:{
+        type: String,
         enum: ["active", "inactive", "paused"],
         default: "active"
     },
