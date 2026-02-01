@@ -14,7 +14,7 @@ export const createMember = async (req, res) => {
         if (!name || !phoneNumber || !email || !joinDate) {
             return res.status(400).json({ message: "You need to fill all the required fields!" })
         }
-        const member = new Member({ name, phoneNumber, email, joinDate , createdBy: req.user.id});
+        const member = new Member({ name, phoneNumber, email, joinDate, createdBy: req.user.id });
         await member.save();
         res.status(201).json(member);
     } catch (error) {
@@ -47,4 +47,17 @@ export const updateMember = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 
+}
+export const updateMemberStatus = async (req, res) => {
+    try {
+        const { id } = req.params
+        const member = await Member.findById(id);
+        if (!member) return res.status(404).json({ message: "Member not found!" });
+        member.status = "inactive";
+        await member.save();
+        res.status(200).json({ message: "member deactivated successfully" })
+    } catch (error) {
+        console.log("Error in updating the member status", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 }

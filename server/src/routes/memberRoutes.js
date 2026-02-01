@@ -1,5 +1,5 @@
 import express from "express";
-import { createMember, getAllMembers, getMember, updateMember } from "../controllers/memberController.js";
+import { createMember, getAllMembers, getMember, updateMember, updateMemberStatus } from "../controllers/memberController.js";
 import {verifyToken} from "../middleware/authMiddleware.js"
 import {authorizeRole} from "../middleware/roleMiddleware.js"
 
@@ -12,6 +12,7 @@ router.get("/", getAllMembers)
 router.get("/:id", getMember)
 router.post("/", createMember)
 router.patch("/:id", updateMember)
+router.patch("/:id/status", updateMemberStatus)
 
 
 export default router
