@@ -1,0 +1,30 @@
+import mongoose  from "mongoose";
+
+const subscriptionSchema = new mongoose.Schema({
+    member: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Member",
+        required: true
+    },
+    plan: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Plan",
+        required: true
+    },
+    startDate: {
+        type: Date,
+        default: Date.now(),
+    },
+    endDate: {
+        type: Date
+    },
+    status: {
+        enum: ["active", "expired", "cancelled", "paused"],
+        default: "active"
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+},{timestamps: true});
