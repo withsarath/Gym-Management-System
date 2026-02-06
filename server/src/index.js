@@ -19,6 +19,7 @@ app.use("/api/members", memberRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 
+//* connect DB then run app
 connectDb().then(() => {
     app.listen(PORT, () => {
         console.log(`the server is running on ${PORT}`);

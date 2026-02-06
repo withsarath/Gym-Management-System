@@ -1,7 +1,7 @@
 import express from "express";
-import { assignPlan, cancelPlan, memberSubscription, pausePlan, resumePlan } from "../controllers/subscriptionController";
-import { verifyToken } from "../middleware/authMiddleware";
-import { authorizeRole } from "../middleware/roleMiddleware";
+import { assignPlan, cancelPlan, memberSubscription, pausePlan, resumePlan } from "../controllers/subscriptionController.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
+import { authorizeRole } from "../middleware/roleMiddleware.js";
 
 const router = express.Router();
 
