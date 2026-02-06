@@ -14,6 +14,8 @@ export const createMember = async (req, res) => {
         if (!name || !phoneNumber || !email || !joinDate) {
             return res.status(400).json({ message: "You need to fill all the required fields!" })
         }
+        
+        //* creating a new member
         const member = new Member({ name, phoneNumber, email, joinDate, createdBy: req.user.id });
         await member.save();
         res.status(201).json(member);

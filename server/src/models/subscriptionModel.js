@@ -1,4 +1,4 @@
-import mongoose  from "mongoose";
+import mongoose from "mongoose";
 
 const subscriptionSchema = new mongoose.Schema({
     member: {
@@ -16,7 +16,8 @@ const subscriptionSchema = new mongoose.Schema({
         default: Date.now(),
     },
     endDate: {
-        type: Date
+        type: Date,
+        required: true
     },
     status: {
         enum: ["active", "expired", "cancelled", "paused"],
@@ -28,3 +29,8 @@ const subscriptionSchema = new mongoose.Schema({
         required: true
     },
 },{timestamps: true});
+
+
+const Subscription = mongoose.model("Subscription", subscriptionSchema);
+
+export default Subscription;

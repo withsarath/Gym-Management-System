@@ -31,7 +31,7 @@ export const createPlan = async (req, res) => {
             name,
             price,
             duration,
-            createdBy: req.user.id
+            createdBy: req.user.id // * created by admin
         })
         await plan.save();
         res.status(201).json(plan);
