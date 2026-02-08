@@ -5,7 +5,8 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import memberRoutes from "./routes/memberRoutes.js";
 import planRoutes from "./routes/planRoutes.js"
-import subscriptionRoutes from "./routes/subscriptionRoutes.js"
+import subscriptionRoutes from "./routes/subscriptionRoutes.js";
+import startExpiryJob from "./utils/expiryJob.js";
 dotenv.config()
 
 const app = express();
@@ -21,6 +22,8 @@ app.use("/api/subscription", subscriptionRoutes);
 
 //* connect DB then run app
 connectDb().then(() => {
+    startExpiryJob();
+    
     app.listen(PORT, () => {
         console.log(`the server is running on ${PORT}`);
     })
