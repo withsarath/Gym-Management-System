@@ -7,7 +7,7 @@ export const makePayment = async (req, res) => {
     try {
         const { memberId, planId, method } = req.body;
         if (!memberId || !planId || !method) {
-            return res.status(400).json({ message: "All feilds are required" })
+            return res.status(400).json({ message: "All fields are required"})
         }
 
         const member = await Member.findById(memberId);
@@ -53,6 +53,8 @@ export const makePayment = async (req, res) => {
 }
 export const getPayments = async (req, res) => {
     try {
+        const payments = await Payment.find().populate("member").populate("plan").sort({ createdAt: -1 });
+        res.status(200).json(payments);
 
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error });
@@ -60,7 +62,16 @@ export const getPayments = async (req, res) => {
 }
 export const memberPayments = async (req, res) => {
     try {
-
+        const { id } = req.params
+        const member = await Member.findById(id);
+        if (!member) {
+            return res.status(404).json({ message: "Member not found" })
+        }
+        const payments = await Payment.find({ member: id })
+            .populate("member")
+            .populate("plan")
+            .sort({ createdAt: -1 });
+        res.status(200).json(payments);
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error });
     }
