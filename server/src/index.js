@@ -8,12 +8,14 @@ import planRoutes from "./routes/planRoutes.js"
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js"
 import startExpiryJob from "./utils/expiryJob.js";
+import dashboardRoute from "./routes/dashboardRoutes.js";
+
 dotenv.config()
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-//middlewares
+// * middlewares
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -21,8 +23,9 @@ app.use("/api/members", memberRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 app.use("/api/payments", paymentRoutes)
+app.use("/api/dashboard", dashboardRoute)
 
-//* connect DB then run app
+// * connect DB then run app
 connectDb().then(() => {
     startExpiryJob();
     app.listen(PORT, () => {
