@@ -1,6 +1,6 @@
 import Member from "../models/memberModel.js";
 import Plan from "../models/planModel.js"
-import Subscription from "../models/subscriptionModel";
+import Subscription from "../models/subscriptionModel.js";
 
 export const assignPlan = async (req, res) => {
     try {
